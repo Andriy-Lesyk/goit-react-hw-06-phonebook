@@ -1,8 +1,13 @@
 import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { v4 as uuId } from 'uuid';
 import { Input, Formm, Btn } from './Forms.styles';
-import PropTypes from 'prop-types';
+import { add} from '../../redux/store'
 
-export default function Form({ onSubmit }) {
+export default function Form() {
+  const dispatch = useDispatch();
+  const contactsSelect = useSelector(state => state.contacts.contacts)
+
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
@@ -16,14 +21,23 @@ export default function Form({ onSubmit }) {
 
   const handleNameSubmit = e => {
     e.preventDefault();
-    onSubmit(name, number);
+    const id = uuId();
+
+    const contCheck = contactsSelect.find(
+      contact => contact.name.toLowerCase() === name.toLowerCase()
+    )
+    
+    contCheck
+      ? alert(`${name} is olready in contacts`)
+      :  dispatch(add( { id, name, number }))
     resetForm();
   };
   const resetForm = () => {
     setName('');
     setNumber('');
   };
-
+  
+  
   return (
     <div>
       <Formm onSubmit={handleNameSubmit}>
@@ -53,6 +67,4 @@ export default function Form({ onSubmit }) {
   );
 }
 
-Form.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-};
+
