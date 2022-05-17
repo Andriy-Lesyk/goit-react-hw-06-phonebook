@@ -2,11 +2,11 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { v4 as uuId } from 'uuid';
 import { Input, Formm, Btn } from './Forms.styles';
-import { add} from '../../redux/store'
+import { add } from '../../redux/store';
 
 export default function Form() {
   const dispatch = useDispatch();
-  const contactsSelect = useSelector(state => state.contacts.contacts)
+  const contactsSelect = useSelector(state => state.contacts.contacts);
 
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
@@ -25,19 +25,18 @@ export default function Form() {
 
     const contCheck = contactsSelect.find(
       contact => contact.name.toLowerCase() === name.toLowerCase()
-    )
-    
+    );
+
     contCheck
       ? alert(`${name} is olready in contacts`)
-      :  dispatch(add( { id, name, number }))
+      : dispatch(add({ id, name, number }));
     resetForm();
   };
   const resetForm = () => {
     setName('');
     setNumber('');
   };
-  
-  
+
   return (
     <div>
       <Formm onSubmit={handleNameSubmit}>
@@ -66,5 +65,3 @@ export default function Form() {
     </div>
   );
 }
-
-
