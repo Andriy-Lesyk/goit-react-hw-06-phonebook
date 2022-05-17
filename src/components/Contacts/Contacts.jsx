@@ -17,7 +17,8 @@ function Contact() {
       : contactsSelect.filter(cont =>
           cont.name.toLowerCase().includes(filterSelect.filter.toLowerCase())
         );
-
+ 
+        console.log(deleteContact)
   return (
     <div>
       <Contacts>
