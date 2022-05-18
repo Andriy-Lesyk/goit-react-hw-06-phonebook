@@ -5,10 +5,9 @@ import { Input } from './Filter.styles';
 
 function Filter() {
   const dispatch = useDispatch();
-  const filterSelect = useSelector(state => state.filter.value);
+  const filterSelect = useSelector(state => state.filter.filter);
   const changeFilter = e => dispatch(inputFilter(e.currentTarget.value));
 
-  console.log(filterSelect)
   return (
     <div>
       <label htmlFor={'filter'}>Find contacts by name</label>
