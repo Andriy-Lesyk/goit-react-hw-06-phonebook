@@ -8,17 +8,13 @@ function Contact() {
   const contactsSelect = useSelector(state => state.contacts.contacts);
   const filterSelect = useSelector(state => state.filter);
 
-  const deleteContact = id => {
-    dispatch(delet(contactsSelect.find(cont => cont.id === id)));
-  };
   let contacts =
     filterSelect === ''
       ? contactsSelect
       : contactsSelect.filter(cont =>
           cont.name.toLowerCase().includes(filterSelect.filter.toLowerCase())
         );
- 
-        console.log(deleteContact)
+  
   return (
     <div>
       <Contacts>
